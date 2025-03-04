@@ -4,16 +4,29 @@ const taskList = document.getElementById('taskList');
 
 let tasks = [];
 
-
+function createTaskElement(task){
+    const taskItem = document.createElement('li');
+    taskItem.textContent = task;
+    const deleteButton = document.createElement('button');
+    deleteButton.innerHTML = '🗑️';
+    deleteButton.addEventListener('click', function(){
+        taskItem.remove();
+        tasks = tasks.filter(t => t !== task);
+        localStorage.setItem('tasks', JSON.stringify(tasks));
+    });
+    taskItem.appendChild(deleteButton);
+    taskList.appendChild(taskItem);
+}
 
 window.onload = function(){
     const storedTasks = localStorage.getItem('tasks');
     if(storedTasks){
         tasks = JSON.parse(storedTasks);
         tasks.forEach(task => {
-            const taskItem = document.createElement('li');
+            /* const taskItem = document.createElement('li');
             taskItem.textContent = task;
-            taskList.appendChild(taskItem);
+            taskList.appendChild(taskItem); */
+            createTaskElement(task); // ✅ Maintenant, on ajoute bien le bouton "🗑️"
         });
 
     }
@@ -29,9 +42,9 @@ function addTask(){
     }
     tasks.push(task);
     localStorage.setItem('tasks', JSON.stringify(tasks));
-
-    const taskItem = document.createElement('li');
+    createTaskElement(task); // ✅ Maintenant, on ajoute bien le bouton "🗑️"
+   /*  const taskItem = document.createElement('li');
     taskItem.textContent = task;
-    taskList.appendChild(taskItem);
+    taskList.appendChild(taskItem); */
     inputTask.value = "";
 };
