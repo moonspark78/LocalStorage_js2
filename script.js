@@ -20,3 +20,19 @@ function createTaskElement(task) {
     taskItem.appendChild(deleteButton);
     taskList.appendChild(taskItem);
 };
+
+function addTask() {
+    const task = inputTask.value.trim();
+    if(task === '') {
+        alert('Task cannot be empty');
+        return;
+    }
+    tasks.push(task);
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+    createTaskElement(task);
+    inputTask.value = '';
+};
+
+
+addButton.addEventListener('click', addTask);
+
