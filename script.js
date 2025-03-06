@@ -36,3 +36,10 @@ function addTask() {
 
 addButton.addEventListener('click', addTask);
 
+window.onload= function(){
+    const storedTasks = localStorage.getItem('tasks');
+    if(storedTasks) {
+        tasks = JSON.parse(storedTasks);
+        tasks.forEach(createTaskElement);
+    }
+}

@@ -9,6 +9,7 @@
 
 #taskInput{
     width: 30%;
+    margin-bottom: 4px;
 }
 
 ul{
@@ -19,4 +20,5 @@ ul{
 
 li{
     background-color: gray;
+    margin: 5px 0;
 }
